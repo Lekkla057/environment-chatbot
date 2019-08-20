@@ -1,5 +1,5 @@
 'use strict';
-const PAGE_ACCESS_TOKEN = 'EAAgrcCdcCQ4BALkSWusw7nSq3jGZCaBhSW8p5E5QamIVW3ENmtzFkd0TLBh8yyEZBHA6BSI3onB2cy3Tw0lJEDDGVJdThMsTRjgK3qx1sLVmnvNT7J7ZBkdQzqHj3UVlv992cpAmK6cLCZAdZAv8SrNmWyu7coSdWKEeHspKUbQZDZD';
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const START_SEARCH_NO = 'START_SEARCH_NO';
 const START_SEARCH_YES = 'START_SEARCH_YES';
 const GREETING = 'GREETING';
@@ -28,11 +28,8 @@ const
  //var ChatStatus = require("./models/chatstatus");
 
 // Sets server port and logs message on success
-//app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
-var port = process.env.PORT || 1337;
-app.listen(port, function () {
-    console.log('App is running on http://localhost:' + port);
-});
+app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {
 
@@ -40,7 +37,6 @@ app.post('/webhook', (req, res) => {
   res.status(200).send('EVENT_RECEIVED');
 
   const body = req.body;
-console.log(body);
 
   if (body.object === 'page') {
       // Iterate over each entry
@@ -73,19 +69,18 @@ console.log(body);
 
 // Accepts GET requests at the /webhook endpoint
 app.get('/webhook', (req, res) => {
-  //  res.send("tong")
-  /** UPDATE YOUR VERIFY TOKEN **/
-  const VERIFY_TOKEN = 'tong182540to'
 
+  /** UPDATE YOUR VERIFY TOKEN **/
+  const VERIFY_TOKEN = process.env.VERIFICATION_TOKEN;
+console.log(VERIFY_TOKEN,req.query);
 
   // Parse params from the webhook verification request
   let mode = req.query['hub.mode'];
   let token = req.query['hub.verify_token'];
   let challenge = req.query['hub.challenge'];
-console.log(VERIFY_TOKEN,"",mode);
+
   // Check if a token and mode were sent
   if (mode && token) {
-
 
     // Check the mode and token sent are correct
     if (mode === 'subscribe' && token === VERIFY_TOKEN) {
