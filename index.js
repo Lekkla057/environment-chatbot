@@ -73,7 +73,7 @@ console.log(body);
 
 // Accepts GET requests at the /webhook endpoint
 app.get('/webhook', (req, res) => {
-
+    res.send("tong")
   /** UPDATE YOUR VERIFY TOKEN **/
   const VERIFY_TOKEN = process.env.VERIFICATION_TOKEN;
 
