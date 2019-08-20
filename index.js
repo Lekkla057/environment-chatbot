@@ -28,8 +28,11 @@ const
  //var ChatStatus = require("./models/chatstatus");
 
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
-
+//app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+var port = process.env.PORT || 1337;
+app.listen(port, function () {
+    console.log('App is running on http://localhost:' + port);
+});
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {
 
@@ -82,7 +85,7 @@ app.get('/webhook', (req, res) => {
   // Check if a token and mode were sent
   if (mode && token) {
 
-    
+
     // Check the mode and token sent are correct
     if (mode === 'subscribe' && token === VERIFY_TOKEN) {
 
