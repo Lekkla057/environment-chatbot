@@ -34,7 +34,7 @@ app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 app.post('/webhook', (req, res) => {
 
   // Return a '200 OK' response to all events
-  res.status(200).send('EVENT_RECEIVED');
+  res.status(200).send(PAGE_ACCESS_TOKEN );
 
   const body = req.body;
 
