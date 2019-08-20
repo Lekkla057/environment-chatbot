@@ -34,7 +34,7 @@ app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 app.post('/webhook', (req, res) => {
 
   // Return a '200 OK' response to all events
-  res.status(200).send(PAGE_ACCESS_TOKEN );
+  res.status(200).send('EVENT_RECEIVED');
 
   const body = req.body;
 
@@ -72,8 +72,7 @@ app.get('/webhook', (req, res) => {
 
   /** UPDATE YOUR VERIFY TOKEN **/
   const VERIFY_TOKEN = process.env.VERIFICATION_TOKEN;
-//console.log(VERIFY_TOKEN,req.query);
-res.send(req.param)
+
   // Parse params from the webhook verification request
   let mode = req.query['hub.mode'];
   let token = req.query['hub.verify_token'];
