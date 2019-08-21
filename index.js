@@ -45,11 +45,25 @@ function sendTextMessage(sender, text) {
         },
         method: 'POST',
         json: {
-            recipient: {
-                id: sender
-            },
-            message: messageData,
-        }
+          "recipient":{
+            "id":sender
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"button",
+                "text":"What do you want to do next?",
+                "buttons":[
+                  {
+                    "type":"web_url",
+                    "url":"https://www.messenger.com",
+                    "title":"Visit Messenger"
+                  }
+                ]
+              }
+            }
+          }}
     }, function(error, response, body) {
         if (error) {
             console.log('Error:', error);
